@@ -32,6 +32,17 @@ app.post("/", async (req, res, next) => {
   }
 })
 
+app.put("/:id", async (req, res, next) => {
+    try {
+      const movie = await db.Movies.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+      })
+      return success(res, movie)
+    } catch (err) {
+      next({ status: 400, message: "failed to update movie" })
+    }
+  })
+
 app.delete("/:id", async (req, res, next) => {
   try {
     await db.Movies.findByIdAndRemove(req.params.id)

@@ -19,6 +19,11 @@ async function deleteMovie(id) {
   return message
 }
 
+async function updateMovie(id, payload) {
+    const { data: newMovie } = await axios.put(`${API_URL}${id}`, payload)
+    return newMovie
+  }
+
 async function getAllMovies() {
   const { data: movies } = await axios.get(API_URL)
   return movies

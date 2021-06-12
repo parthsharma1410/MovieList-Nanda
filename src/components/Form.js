@@ -32,6 +32,15 @@ export default function Form() {
     setMovies([...movies, newMovie])
   }
 
+  const updateMovie = async (e, id) => {
+    e.stopPropagation()
+    const payload = {
+      completed: !movies.find(movie => movie._id === id).completed,
+    }
+    const updatedMovie = await APIHelper.updateMovie(id, payload)
+    setMovieName(movies.map(movie => (movie._id === id ? updatedMovie : movie)))
+  }
+
   const deleteMovie = async (e, id) => {
     try {
       e.stopPropagation()
@@ -43,7 +52,7 @@ export default function Form() {
 
   return (
     <div className="container">
-       <form>
+       <form className='form'>
          <div class="mb-3">
               <label for="MovieName" class="form-label">Movie Name</label>
                <input type="string" class="form-control" id="MovieName" aria-describedby="MovieName" onChange={({ target }) => setMovieName(target.value)}/>
@@ -66,23 +75,38 @@ export default function Form() {
                 </div>
                 <button type="submit" class="btn btn-primary" onClick={createMovie}>Submit</button>
             </form>
-
-            {movies.map(({ _id, MovieName, Language, ReleaseDate, Budget, Collection}, i) => (
-          <div className="comment mb-4 text-justify animate__animated animate__fadeInLeft animate__delay-1s" >
+<br /><br />
+            {movies.map(({ _id, MovieName, Language, ReleaseDate, Budget, Collection, completed}, i) => (
+          <div className="movie mb-4 text-justify animate__animated animate__fadeInLeft animate__delay-1s" >
             <h4 className="heading">{movies[i].MovieName}</h4> <br />
-            <p className="pt-4 pb-0 text">
+            {/* <li
+            key={i}
+            onClick={e => updateMovie(e, _id)}
+            className={completed ? "completed" : ""}
+          ></li> */}
+            <div class='flexbox'>
+                <div className='left'>
+                <p className="pt-4 pb-0 text">
+                    <strong>Language: </strong>
             {movies[i].Language}
             </p>
             <p className="pt-4 pb-0 text">
+            <strong>Release Date: </strong>
             {movies[i].ReleaseDate}
             </p>
-            <p className="pt-4 pb-0 text">
+                </div>
+                <div className='right'>
+                <p className="pt-4 pb-0 text">
+                <strong>Budget: </strong>
             {movies[i].Budget}
             </p>
             <p className="pt-4 pb-0 text">
+            <strong>Collection: </strong>
             {movies[i].Collection}
             </p>
-            <button className='btndelete' id='crossButton' onClick={e => deleteMovie(e, _id)}> Delete </button>
+                </div>
+            </div>
+            <button className='btn btn-danger' id='crossButton' onClick={e => deleteMovie(e, _id)}> Delete </button>
            </div>
         ))}
     </div>

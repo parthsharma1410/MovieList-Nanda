@@ -4,9 +4,9 @@ import "../App.css";
 export default function Navbar() {
   return (
     <div className="container">
-        <nav class="navbar navbar-light bg-light">
+        <nav class="nav">
             <div class="container-fluid">
-                 <span class="navbar-brand mb-0 h1">MovieList-Nanda</span>
+             <strong><span class="heading">MovieList-Nanda</span></strong>
              </div>
         </nav>
     </div>

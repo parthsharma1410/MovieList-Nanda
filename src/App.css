@@ -2,37 +2,70 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.form {
+  margin-left: 36%;
+  margin-right: 36%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.movie {
+  padding: 2%;
+  border-width: 1px;
+  border-radius: 20px;
+  border-style: solid;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  font-family: "Poppins", sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.nav {
+  text-align: left;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  background-color: rgb(254, 255, 255);
+  font-family: "Montserrat", sans-serif;
+}
+
+.heading {
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.flexbox {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.form {
+  font-family: "Poppins", sans-serif;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.left {
+  margin-left: 10%;
+  padding-right: 20%;
+}
+
+.right {
+  margin-left: 20%;
+}
+
+@media screen and (max-width: 800px) {
+  .flexbox {
+    display: block;
   }
-  to {
-    transform: rotate(360deg);
+  .form {
+    margin-left: 20%;
+    margin-right: 20%;
   }
+  .right {
+    margin-left: 0%;
+  }
+  .left {
+    margin-left: 0%;
+    padding-right: 0%;
+  }
+}
+
+.nav {
+  width: 100%;
 }
