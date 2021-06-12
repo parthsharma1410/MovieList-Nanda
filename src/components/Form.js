@@ -73,6 +73,16 @@ export default function Form() {
             <p className="pt-4 pb-0 text">
             {movies[i].Language}
             </p>
+            <p className="pt-4 pb-0 text">
+            {movies[i].ReleaseDate}
+            </p>
+            <p className="pt-4 pb-0 text">
+            {movies[i].Budget}
+            </p>
+            <p className="pt-4 pb-0 text">
+            {movies[i].Collection}
+            </p>
+            <button className='btndelete' id='crossButton' onClick={e => deleteMovie(e, _id)}> Delete </button>
            </div>
         ))}
     </div>
