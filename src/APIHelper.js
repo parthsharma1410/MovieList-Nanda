@@ -19,9 +19,9 @@ async function deleteMovie(id) {
   return message
 }
 
-async function updateMovie(id, payload) {
-    const { data: newMovie } = await axios.put(`${API_URL}${id}`, payload)
-    return newMovie
+async function updateMovie(id, MovieName) {
+    const { data: newMovieName } = await axios.put(`${API_URL}${id}`, MovieName)
+    return newMovieName
   }
 
 async function getAllMovies() {
@@ -29,4 +29,4 @@ async function getAllMovies() {
   return movies
 }
 
-export default { createMovie, getAllMovies, deleteMovie }
+export default { createMovie, getAllMovies, updateMovie, deleteMovie }

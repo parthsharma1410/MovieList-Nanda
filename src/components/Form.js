@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../App.css";
 import APIHelper from "../APIHelper"
+import popcorn from '../img/popcorn.png'
 
 export default function Form() {
 
@@ -10,6 +11,7 @@ export default function Form() {
   const [ReleaseDate, setReleaseDate] = useState("")
   const [Budget, setBudget] = useState("")
   const [Collection, setCollection] = useState("")
+  const [updatedName, setUpdatedName] = useState("")
 
   useEffect(() => {
     const fetchMovieAndSetMovies = async () => {
@@ -33,12 +35,16 @@ export default function Form() {
   }
 
   const updateMovie = async (e, id) => {
-    e.stopPropagation()
-    const payload = {
-      completed: !movies.find(movie => movie._id === id).completed,
-    }
-    const updatedMovie = await APIHelper.updateMovie(id, payload)
-    setMovieName(movies.map(movie => (movie._id === id ? updatedMovie : movie)))
+      try {
+          e.stopPropagation()
+          setMovieName(movies.map(movie => (movie._id === id ? movie.MovieName = updatedName : null)))
+          const movie =  movies.find(movie => movie._id === id)
+          const updatedMovieName = await APIHelper.updateMovie(id, movie)
+          console.log({movie})
+          console.log({updatedMovieName})
+      } catch(err) {
+          console.log(err)
+      }
   }
 
   const deleteMovie = async (e, id) => {
@@ -52,7 +58,8 @@ export default function Form() {
 
   return (
     <div className="container">
-       <form className='form'>
+        <div className='flexbox'>
+       <form className='form animate__animated animate__fadeIn animate__delay-1s'>
          <div class="mb-3">
               <label for="MovieName" class="form-label">Movie Name</label>
                <input type="string" class="form-control" id="MovieName" aria-describedby="MovieName" onChange={({ target }) => setMovieName(target.value)}/>
@@ -75,10 +82,16 @@ export default function Form() {
                 </div>
                 <button type="submit" class="btn btn-primary" onClick={createMovie}>Submit</button>
             </form>
+            <div className='image'>
+                <img src={popcorn} alt='MovieList' />
+            </div>
+        </div>
 <br /><br />
             {movies.map(({ _id, MovieName, Language, ReleaseDate, Budget, Collection, completed}, i) => (
           <div className="movie mb-4 text-justify animate__animated animate__fadeInLeft animate__delay-1s" >
             <h4 className="heading">{movies[i].MovieName}</h4> <br />
+            <input type="string" class="form-control" id="MovieName" onChange={({ target }) => setUpdatedName(target.value)} />
+            <button type="submit" class="btn btn-success" onClick={e => updateMovie(e, _id)} >Update</button>
             {/* <li
             key={i}
             onClick={e => updateMovie(e, _id)}
